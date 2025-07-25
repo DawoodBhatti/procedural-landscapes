@@ -1,0 +1,179 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddt3y2gcsslnd"]
+
+[ext_resource type="Script" uid="uid://dlyosweik46hm" path="res://levels/perlin_noise.gd" id="1_7ygi4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fgmrb"]
+bg_color = Color(0.40642, 0.40642, 0.40642, 1)
+
+[node name="WorldGen" type="Node2D"]
+script = ExtResource("1_7ygi4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 134.5
+offset_top = -268.0
+offset_right = 465.5
+offset_bottom = 268.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fgmrb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 319.0
+offset_bottom = 528.0
+mouse_filter = 2
+
+[node name="Noise Type" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+mouse_filter = 0
+theme_override_font_sizes/font_size = 40
+text = "Noise Type:"
+
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/Panel/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+selected = 0
+item_count = 5
+popup/item_0/text = "PERLIN"
+popup/item_0/id = 0
+popup/item_1/text = "VALUE_CUBIC"
+popup/item_1/id = 1
+popup/item_2/text = "CELLULAR"
+popup/item_2/id = 2
+popup/item_3/text = "SIMPLEX"
+popup/item_3/id = 3
+popup/item_4/text = "SIMPLEX_SMOOTH"
+popup/item_4/id = 4
+
+[node name="Frequency" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+mouse_filter = 0
+theme_override_font_sizes/font_size = 40
+text = "Frequency:"
+
+[node name="FrequencySlider" type="HSlider" parent="CanvasLayer/Panel/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+max_value = 0.1
+step = 0.001
+value = 0.02
+
+[node name="Octaves" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 0
+theme_override_font_sizes/font_size = 40
+text = "Octaves:"
+
+[node name="OctavesSlider" type="HSlider" parent="CanvasLayer/Panel/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+max_value = 10.0
+value = 5.0
+
+[node name="Lacunarity" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 0
+theme_override_font_sizes/font_size = 40
+text = "Lacunarity:"
+
+[node name="LacunaritySlider" type="HSlider" parent="CanvasLayer/Panel/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+max_value = 10.0
+step = 0.1
+
+[node name="Seed" type="HBoxContainer" parent="CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel/VBoxContainer/Seed"]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 0
+theme_override_font_sizes/font_size = 40
+text = "Seed:   "
+
+[node name="SeedValue" type="LineEdit" parent="CanvasLayer/Panel/VBoxContainer/Seed"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 40
+text = "0"
+max_length = 10
+
+[node name="Panel2" type="Panel" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 532.0
+offset_top = -156.0
+offset_right = 868.0
+offset_bottom = 156.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fgmrb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 0
+offset_right = 336.0
+offset_bottom = 312.0
+mouse_filter = 0
+
+[node name="FreqDisplay" type="Label" parent="CanvasLayer/Panel2/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 0
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OctDisplay" type="Label" parent="CanvasLayer/Panel2/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 0
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LacDisplay" type="Label" parent="CanvasLayer/Panel2/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 0
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Perlin" type="Sprite2D" parent="."]
+position = Vector2(84, 84)
+centered = false
+
+[connection signal="item_selected" from="CanvasLayer/Panel/VBoxContainer/OptionButton" to="." method="_on_noise_type_selected"]
+[connection signal="value_changed" from="CanvasLayer/Panel/VBoxContainer/FrequencySlider" to="." method="_on_frequency_changed"]
+[connection signal="value_changed" from="CanvasLayer/Panel/VBoxContainer/OctavesSlider" to="." method="_on_octaves_changed"]
+[connection signal="value_changed" from="CanvasLayer/Panel/VBoxContainer/LacunaritySlider" to="." method="_on_lacunarity_changed"]
+[connection signal="text_changed" from="CanvasLayer/Panel/VBoxContainer/Seed/SeedValue" to="." method="_on_seed_value_changed"]

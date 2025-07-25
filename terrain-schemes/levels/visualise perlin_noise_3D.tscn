@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bq1xioupkr4t6"]
+
+[ext_resource type="Script" uid="uid://dobg0a3124vt7" path="res://levels/visualise_perlin_noise_3d.gd" id="1_0f83t"]
+[ext_resource type="PackedScene" uid="uid://0bghtnp2flcn" path="res://characters/flying_capsule.tscn" id="2_kem44"]
+
+[node name="WorldGen3D" type="Node3D"]
+script = ExtResource("1_0f83t")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="FlyingCapsule" parent="." instance=ExtResource("2_kem44")]

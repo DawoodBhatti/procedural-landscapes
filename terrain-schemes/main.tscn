@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bb87u205plv8n"]
+
+[ext_resource type="PackedScene" uid="uid://0bghtnp2flcn" path="res://characters/flying_capsule.tscn" id="2_0xm2m"]
+
+[sub_resource type="Sky" id="Sky_ig7tw"]
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+background_mode = 2
+sky = SubResource("Sky_ig7tw")
+ambient_light_color = Color(0.362614, 0.560276, 1, 1)
+reflected_light_source = 2
+fog_enabled = true
+
+[node name="Main" type="Node3D"]
+
+[node name="FlyingCapsule" parent="." instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 10, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(100, 1, 100)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0xm2m")
