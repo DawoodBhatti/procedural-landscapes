@@ -1,0 +1,169 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddt3y2gcsslnd"]
+
+[ext_resource type="Script" uid="uid://bghuptbgk8wbb" path="res://option_button.gd" id="1_3nhhm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fgmrb"]
+bg_color = Color(0.17143, 0.410496, 0.68628, 1)
+
+[node name="WorldGen" type="Node2D"]
+
+[node name="Control Panel" type="CanvasLayer" parent="."]
+
+[node name="Generation Phase" type="Panel" parent="Control Panel"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 968.0
+offset_top = -796.0
+offset_right = 1416.0
+offset_bottom = -643.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fgmrb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control Panel/Generation Phase"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 432.0
+offset_bottom = 136.0
+mouse_filter = 2
+
+[node name="Generation Phase" type="Label" parent="Control Panel/Generation Phase/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+mouse_filter = 0
+theme_override_font_sizes/font_size = 40
+text = "Generation Phase:"
+
+[node name="OptionButton" type="OptionButton" parent="Control Panel/Generation Phase/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+selected = 0
+item_count = 1
+popup/item_0/text = "Seeding"
+popup/item_0/id = 0
+script = ExtResource("1_3nhhm")
+
+[node name="Seeding" type="CanvasLayer" parent="."]
+
+[node name="Distribution Type" type="Panel" parent="Seeding"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 968.0
+offset_top = -644.0
+offset_right = 1416.0
+offset_bottom = -491.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fgmrb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Seeding/Distribution Type"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 432.0
+offset_bottom = 136.0
+mouse_filter = 2
+
+[node name="Generation Phase" type="Label" parent="Seeding/Distribution Type/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+mouse_filter = 0
+theme_override_font_sizes/font_size = 40
+text = "Distribution Type:"
+
+[node name="OptionButton" type="OptionButton" parent="Seeding/Distribution Type/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+selected = 0
+item_count = 5
+popup/item_0/text = "Random"
+popup/item_0/id = 0
+popup/item_1/text = "Fibonacci"
+popup/item_1/id = 1
+popup/item_2/text = "Poisson Disk"
+popup/item_2/id = 2
+popup/item_3/text = "Halton Sequence"
+popup/item_3/id = 3
+popup/item_4/text = "Circular"
+popup/item_4/id = 4
+script = ExtResource("1_3nhhm")
+
+[node name="Random" type="CanvasLayer" parent="Seeding"]
+
+[node name="Seeding Properties" type="Panel" parent="Seeding/Random"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 968.0
+offset_top = -492.0
+offset_right = 1416.0
+offset_bottom = -348.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fgmrb")
+
+[node name="Labels" type="VBoxContainer" parent="Seeding/Random/Seeding Properties"]
+layout_mode = 2
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 440.0
+offset_bottom = 124.0
+mouse_filter = 0
+
+[node name="NumPoints" type="Label" parent="Seeding/Random/Seeding Properties/Labels"]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 0
+theme_override_font_sizes/font_size = 40
+text = "Num Points:  "
+
+[node name="SeedNo" type="Label" parent="Seeding/Random/Seeding Properties/Labels"]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 0
+theme_override_font_sizes/font_size = 40
+text = "Seed No:         "
+
+[node name="Seed" type="VBoxContainer" parent="Seeding/Random/Seeding Properties"]
+layout_mode = 2
+offset_left = 16.0
+offset_top = 6.0
+offset_right = 432.0
+offset_bottom = 136.0
+grow_vertical = 0
+mouse_filter = 0
+
+[node name="NumPoints" type="LineEdit" parent="Seeding/Random/Seeding Properties/Seed"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 40
+text = "0"
+max_length = 10
+
+[node name="SeedValue" type="LineEdit" parent="Seeding/Random/Seeding Properties/Seed"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 40
+text = "0"
+max_length = 10
+
+[connection signal="item_selected" from="Control Panel/Generation Phase/VBoxContainer/OptionButton" to="." method="_on_noise_type_selected"]
+[connection signal="item_selected" from="Seeding/Distribution Type/VBoxContainer/OptionButton" to="." method="_on_noise_type_selected"]
+[connection signal="text_changed" from="Seeding/Random/Seeding Properties/Seed/NumPoints" to="." method="_on_seed_value_changed"]
+[connection signal="text_changed" from="Seeding/Random/Seeding Properties/Seed/SeedValue" to="." method="_on_seed_value_changed"]

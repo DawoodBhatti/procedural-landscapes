@@ -1,0 +1,5 @@
+[gd_resource type="Theme" format=3 uid="uid://clogtfo0p60vf"]
+
+[resource]
+default_font_size = 30
+PopupMenu/fonts/font = null

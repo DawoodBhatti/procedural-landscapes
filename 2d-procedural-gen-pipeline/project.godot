@@ -11,5 +11,12 @@ config_version=5
 [application]
 
 config/name="procedural gen pipeline"
+run/main_scene="uid://ddt3y2gcsslnd"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=2
