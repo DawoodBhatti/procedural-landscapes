@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8pi0sceqgorj"]
+
+[ext_resource type="Texture2D" uid="uid://bxcsjtcw32gch" path="res://assets/outline-arrow-icon-png.png" id="1_2o10d"]
+[ext_resource type="Texture2D" uid="uid://cx8plwb8e2dpd" path="res://assets/go-outline-arrow-icon-png.png" id="2_1snwt"]
+
+[node name="GoButton" type="TextureButton"]
+offset_left = 2104.0
+offset_top = 264.0
+offset_right = 4024.0
+offset_bottom = 2184.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("1_2o10d")
+texture_hover = ExtResource("2_1snwt")

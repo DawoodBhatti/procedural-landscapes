@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq048cqqt67hc"]
+
+[ext_resource type="Texture2D" uid="uid://bxcsjtcw32gch" path="res://assets/outline-arrow-icon-png.png" id="1_kxmdl"]
+[ext_resource type="Texture2D" uid="uid://y81trqj2annk" path="res://assets/back-outline-arrow-icon-png.png" id="2_nhiqy"]
+
+[node name="BackButton" type="TextureButton"]
+offset_left = 2048.0
+offset_top = 456.0
+offset_right = 3968.0
+offset_bottom = 2376.0
+rotation = 3.1415882
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("1_kxmdl")
+texture_hover = ExtResource("2_nhiqy")

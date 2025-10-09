@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvtaho8gjmhbu"]
+
+[ext_resource type="Script" uid="uid://6bm48auaklyx" path="res://scripts/camera_2d.gd" id="1_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://bh844f1px8w0k" path="res://scenes/background.tscn" id="2_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://ddt3y2gcsslnd" path="res://scenes/visual editor.tscn" id="4_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://g4stigp2mou2" path="res://scenes/visual_effects_manager.tscn" id="4_tefeu"]
+[ext_resource type="PackedScene" uid="uid://dd43syqtrpiep" path="res://scenes/generation_manager.tscn" id="5_o6xl0"]
+
+[node name="main" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+z_index = 1
+script = ExtResource("1_jyhfs")
+
+[node name="Background" parent="." instance=ExtResource("2_tbgi4")]
+
+[node name="VisualEditor" parent="." instance=ExtResource("4_o6xl0")]
+
+[node name="VisualEffectsManager" parent="." instance=ExtResource("4_tefeu")]
+
+[node name="GenerationManager" parent="." instance=ExtResource("5_o6xl0")]

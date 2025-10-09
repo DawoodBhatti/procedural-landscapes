@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dd43syqtrpiep"]
+
+[ext_resource type="Script" uid="uid://db6au17rexybr" path="res://scenes/generation_manager.gd" id="1_wn3rg"]
+
+[node name="GenerationManager" type="Node2D"]
+script = ExtResource("1_wn3rg")
+
+[node name="Node" type="Node" parent="."]

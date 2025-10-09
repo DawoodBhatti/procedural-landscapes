@@ -7,7 +7,7 @@ var signal_detail : int = 0
 
 signal gen_phase_selected(new_phase: String)     
 signal dist_type_selected(new_phase: String)     
-
+signal generation_requested
 
 # ----------------------------
 # 📣 Emit wrapper with optional debug logging

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://ddt3y2gcsslnd"]
+[gd_scene load_steps=9 format=3 uid="uid://ddt3y2gcsslnd"]
 
 [ext_resource type="Script" uid="uid://bghuptbgk8wbb" path="res://scripts/dist_options.gd" id="1_3nhhm"]
 [ext_resource type="Script" uid="uid://ckgw2v8xenr0c" path="res://scripts/generation_options.gd" id="1_5hor1"]
 [ext_resource type="Script" uid="uid://dqm7ubtqa626v" path="res://scripts/signal_manager.gd" id="1_vgrvx"]
 [ext_resource type="Script" uid="uid://26dphkgxkor" path="res://scripts/state_manager.gd" id="3_mpv8h"]
+[ext_resource type="Script" uid="uid://cbes75v24bb2t" path="res://scripts/generation_panel.gd" id="3_mpykb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fgmrb"]
 bg_color = Color(0.17143, 0.410496, 0.68628, 1)
@@ -27,9 +28,10 @@ script = ExtResource("1_vgrvx")
 [node name="StateManager" type="Node" parent="."]
 script = ExtResource("3_mpv8h")
 
-[node name="Control Panel" type="CanvasLayer" parent="."]
+[node name="GenerationPanel" type="CanvasLayer" parent="."]
+script = ExtResource("3_mpykb")
 
-[node name="Generation Phase" type="Panel" parent="Control Panel"]
+[node name="GenerationPhase" type="Panel" parent="GenerationPanel"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -44,7 +46,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fgmrb")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control Panel/Generation Phase"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GenerationPanel/GenerationPhase"]
 layout_mode = 0
 offset_left = 48.0
 offset_top = 16.0
@@ -52,14 +54,14 @@ offset_right = 464.0
 offset_bottom = 136.0
 mouse_filter = 2
 
-[node name="Generation Phase" type="Label" parent="Control Panel/Generation Phase/VBoxContainer"]
+[node name="Generation Phase" type="Label" parent="GenerationPanel/GenerationPhase/VBoxContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 mouse_filter = 0
 theme_override_font_sizes/font_size = 40
 text = "Generation Phase:"
 
-[node name="GenOptions" type="OptionButton" parent="Control Panel/Generation Phase/VBoxContainer"]
+[node name="GenOptions" type="OptionButton" parent="GenerationPanel/GenerationPhase/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -72,10 +74,10 @@ popup/item_1/text = "Other"
 popup/item_1/id = 1
 script = ExtResource("1_5hor1")
 
-[node name="SeedingSegment" type="CanvasLayer" parent="."]
+[node name="SeedingSegment" type="CanvasLayer" parent="GenerationPanel"]
 unique_name_in_owner = true
 
-[node name="Distribution Type" type="Panel" parent="SeedingSegment"]
+[node name="DistributionType" type="Panel" parent="GenerationPanel/SeedingSegment"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -90,7 +92,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5hor1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SeedingSegment/Distribution Type"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GenerationPanel/SeedingSegment/DistributionType"]
 layout_mode = 0
 offset_left = 48.0
 offset_top = 16.0
@@ -98,14 +100,14 @@ offset_right = 464.0
 offset_bottom = 136.0
 mouse_filter = 2
 
-[node name="Distribution Types" type="Label" parent="SeedingSegment/Distribution Type/VBoxContainer"]
+[node name="DistributionTypes" type="Label" parent="GenerationPanel/SeedingSegment/DistributionType/VBoxContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 mouse_filter = 0
 theme_override_font_sizes/font_size = 40
 text = "Distribution Type:"
 
-[node name="DistTypes" type="OptionButton" parent="SeedingSegment/Distribution Type/VBoxContainer"]
+[node name="DistTypes" type="OptionButton" parent="GenerationPanel/SeedingSegment/DistributionType/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -124,10 +126,10 @@ popup/item_4/text = "Circular"
 popup/item_4/id = 4
 script = ExtResource("1_3nhhm")
 
-[node name="RandomDist" type="CanvasLayer" parent="SeedingSegment"]
+[node name="RandomDist" type="CanvasLayer" parent="GenerationPanel/SeedingSegment"]
 unique_name_in_owner = true
 
-[node name="Seeding Properties" type="Panel" parent="SeedingSegment/RandomDist"]
+[node name="Seeding Properties" type="Panel" parent="GenerationPanel/SeedingSegment/RandomDist"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -143,37 +145,37 @@ size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_mpv8h")
 
-[node name="Labels" type="VBoxContainer" parent="SeedingSegment/RandomDist/Seeding Properties"]
-layout_mode = 2
+[node name="Labels" type="VBoxContainer" parent="GenerationPanel/SeedingSegment/RandomDist/Seeding Properties"]
+layout_mode = 0
 offset_left = 48.0
 offset_top = 16.0
 offset_right = 308.0
 offset_bottom = 136.0
 mouse_filter = 0
 
-[node name="Number of Points" type="Label" parent="SeedingSegment/RandomDist/Seeding Properties/Labels"]
+[node name="Number of Points" type="Label" parent="GenerationPanel/SeedingSegment/RandomDist/Seeding Properties/Labels"]
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_filter = 0
 theme_override_font_sizes/font_size = 40
 text = "Num Points:  "
 
-[node name="Seed Number" type="Label" parent="SeedingSegment/RandomDist/Seeding Properties/Labels"]
+[node name="Seed Number" type="Label" parent="GenerationPanel/SeedingSegment/RandomDist/Seeding Properties/Labels"]
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_filter = 0
 theme_override_font_sizes/font_size = 40
 text = "Seed No:         "
 
-[node name="Seed" type="VBoxContainer" parent="SeedingSegment/RandomDist/Seeding Properties"]
-layout_mode = 2
+[node name="Seed" type="VBoxContainer" parent="GenerationPanel/SeedingSegment/RandomDist/Seeding Properties"]
+layout_mode = 0
 offset_left = 312.0
 offset_top = 16.0
 offset_right = 464.0
 offset_bottom = 134.0
 mouse_filter = 0
 
-[node name="Number of Points" type="LineEdit" parent="SeedingSegment/RandomDist/Seeding Properties/Seed"]
+[node name="Number of Points" type="LineEdit" parent="GenerationPanel/SeedingSegment/RandomDist/Seeding Properties/Seed"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
@@ -181,14 +183,30 @@ theme_override_font_sizes/font_size = 35
 text = "100"
 max_length = 10
 
-[node name="Seed Number" type="LineEdit" parent="SeedingSegment/RandomDist/Seeding Properties/Seed"]
+[node name="Seed Number" type="LineEdit" parent="GenerationPanel/SeedingSegment/RandomDist/Seeding Properties/Seed"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 35
 text = "0"
 max_length = 10
 
-[connection signal="item_selected" from="Control Panel/Generation Phase/VBoxContainer/GenOptions" to="Control Panel/Generation Phase/VBoxContainer/GenOptions" method="_on_item_selected"]
-[connection signal="item_selected" from="SeedingSegment/Distribution Type/VBoxContainer/DistTypes" to="SeedingSegment/Distribution Type/VBoxContainer/DistTypes" method="_on_item_selected"]
-[connection signal="text_changed" from="SeedingSegment/RandomDist/Seeding Properties/Seed/Number of Points" to="." method="_on_seed_value_changed"]
-[connection signal="text_changed" from="SeedingSegment/RandomDist/Seeding Properties/Seed/Seed Number" to="." method="_on_seed_value_changed"]
+[node name="GenerateButton" type="Button" parent="GenerationPanel"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 904.0
+offset_top = -276.0
+offset_right = 1328.0
+offset_bottom = -180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Generate!"
+
+[connection signal="item_selected" from="GenerationPanel/GenerationPhase/VBoxContainer/GenOptions" to="GenerationPanel/GenerationPhase/VBoxContainer/GenOptions" method="_on_item_selected"]
+[connection signal="item_selected" from="GenerationPanel/SeedingSegment/DistributionType/VBoxContainer/DistTypes" to="GenerationPanel/SeedingSegment/DistributionType/VBoxContainer/DistTypes" method="_on_item_selected"]
+[connection signal="text_changed" from="GenerationPanel/SeedingSegment/RandomDist/Seeding Properties/Seed/Number of Points" to="." method="_on_seed_value_changed"]
+[connection signal="text_changed" from="GenerationPanel/SeedingSegment/RandomDist/Seeding Properties/Seed/Seed Number" to="." method="_on_seed_value_changed"]
