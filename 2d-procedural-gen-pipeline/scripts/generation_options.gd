@@ -3,7 +3,7 @@ extends OptionButton
 #here we emit signals when different phases are selected
 #and we also override the default text size for dropdown items
 
-@onready var signals = %SignalManager
+@onready var signals = get_tree().root.get_node("main/SignalManager")
 
 func _ready():
 	var popup = get_popup()

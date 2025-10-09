@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b08ab5noniofc"]
+
+[ext_resource type="Script" uid="uid://dig7dwoa5h5yq" path="res://scripts/generation_engine.gd" id="1_16y7q"]
+
+[node name="GenEngine" type="Node"]
+script = ExtResource("1_16y7q")
+
+[node name="Distributions" type="Node" parent="."]

@@ -15,7 +15,6 @@ const HUE_SPEED := 0.0001  # slow fade
 func _ready():
 
 	position = get_viewport().size/2
-	start()
 
 
 func _process(delta):

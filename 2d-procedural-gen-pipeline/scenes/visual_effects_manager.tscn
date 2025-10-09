@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://g4stigp2mou2"]
 
-[ext_resource type="Script" uid="uid://c68hmafe3mnxj" path="res://scenes/visual_effects_manager.gd" id="1_ncihy"]
+[ext_resource type="Script" uid="uid://c68hmafe3mnxj" path="res://scripts/visual_effects_manager.gd" id="1_ncihy"]
 [ext_resource type="PackedScene" uid="uid://23qp1q50i5nn" path="res://scenes/loading_wheel.tscn" id="2_dbdwf"]
 
 [node name="VisualEffectsManager" type="Node2D"]
