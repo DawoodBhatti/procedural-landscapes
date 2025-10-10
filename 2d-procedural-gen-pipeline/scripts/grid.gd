@@ -1,29 +1,33 @@
 extends Node2D
 
+@onready var signals: Node = $"../../SignalManager"
+
 # Grid state and appearance settings
 var grid_state : bool = true
 var grid_start : Vector2 = Vector2.ZERO
 var grid_end   : Vector2 = Vector2.ZERO
+var zoom_scale : float = 1.0
+
 
 # Minor/major line colors — share alpha for fade effect
-var grid_color_minor: Color = Color(0, 0, 0, 0.2)  # faint minor lines
-var grid_color_major: Color = Color(0, 0, 0, 0.5)  # stronger major lines
-var grid_halfwidth : float = 1.0
+var minor_grid_colour: Color = Color(0, 0, 0, 0.2)  # faint minor lines
+var major_grid_colour: Color = Color(0, 0, 0, 0.5)  # stronger major lines
+var minor_grid_linewidth : float = 1.0
+var major_grid_linewidth : float = minor_grid_linewidth * 1.5 * zoom_scale
 
 # Tile size in pixels at zoom = 1
 const TILE_SIZE : float = 10.0
 
-# Major line frequency (every N tiles draw a stronger line)
-const MAJOR_LINE_EVERY : int = 10
+# line frequency (every N tiles draw a strong/light line)
+var major_line_every : int = 10
+var minor_line_every : int = 1 
 
-
-#TODO: we want to draw the major axis differently depending on the zoom level
-#TODO: muck around with this....
-
+func _ready() -> void:
+	signals.zoom_changed.connect(_on_zoom_changed)
 
 #we draw the grid in 4 quadrants from the origin to avoid offset issues
 func _draw() -> void:
-	if grid_color_major.a <= 0.01:
+	if major_grid_colour.a <= 0.01:
 		return
 
 	var bg := $".."
@@ -41,43 +45,43 @@ func _draw() -> void:
 	# Center to right -  vertical grid lines
 	for i in range(0, int(num_x) + 1):
 		var x := map_origin.x + i * TILE_SIZE
-		var color := grid_color_minor
-		if i % MAJOR_LINE_EVERY == 0:
-			color = grid_color_major
-		draw_line(Vector2(x, bg_top_left.y), Vector2(x, bg_bottom_right.y), color, grid_halfwidth)
-#
+		if i % major_line_every == 0:
+			draw_line(Vector2(x, bg_top_left.y), Vector2(x, bg_bottom_right.y), major_grid_colour, major_grid_linewidth)
+		elif i % minor_line_every == 0:
+			draw_line(Vector2(x, bg_top_left.y), Vector2(x, bg_bottom_right.y), minor_grid_colour, minor_grid_linewidth)
+
 
 	# Center to left - vertical grid lines 
 	for i in range(1, int(num_x) + 1):
 		var x := map_origin.x - i * TILE_SIZE
-		var color := grid_color_minor
-		if i % MAJOR_LINE_EVERY == 0:
-			color = grid_color_major
-		draw_line(Vector2(x, bg_top_left.y), Vector2(x, bg_bottom_right.y), color, grid_halfwidth)
+		if i % major_line_every == 0:
+			draw_line(Vector2(x, bg_top_left.y), Vector2(x, bg_bottom_right.y), major_grid_colour, major_grid_linewidth)
+		elif i % minor_line_every == 0:
+			draw_line(Vector2(x, bg_top_left.y), Vector2(x, bg_bottom_right.y), minor_grid_colour, minor_grid_linewidth)
 
 
 	# Center to bottom - horizontal grid lines 
 	for j in range(0, int(num_y) + 1):
 		var y := map_origin.y + j * TILE_SIZE
-		var color := grid_color_minor
-		if j % MAJOR_LINE_EVERY == 0:
-			color = grid_color_major
-		draw_line(Vector2(bg_top_left.x, y), Vector2(bg_bottom_right.x, y), color, grid_halfwidth)
+		if j % major_line_every == 0:
+			draw_line(Vector2(bg_top_left.x, y), Vector2(bg_bottom_right.x, y), major_grid_colour, major_grid_linewidth)
+		elif j % minor_line_every == 0:
+			draw_line(Vector2(bg_top_left.x, y), Vector2(bg_bottom_right.x, y), minor_grid_colour, minor_grid_linewidth)
 
 
 	# Center to top - horizontal grid lines 
 	for j in range(1, int(num_y) + 1):
 		var y := map_origin.y - j * TILE_SIZE
-		var color := grid_color_minor
-		if j % MAJOR_LINE_EVERY == 0:
-			color = grid_color_major
-		draw_line(Vector2(bg_top_left.x, y), Vector2(bg_bottom_right.x, y), color, grid_halfwidth)
+		if j % major_line_every == 0:
+			draw_line(Vector2(bg_top_left.x, y), Vector2(bg_bottom_right.x, y), major_grid_colour, major_grid_linewidth)
+		elif j % minor_line_every == 0:
+			draw_line(Vector2(bg_top_left.x, y), Vector2(bg_bottom_right.x, y), minor_grid_colour, minor_grid_linewidth)
 
 
 	# === Red axis lines through shape_center ===
 	var red_color := Color(1, 0, 0, 1.0)
-	draw_line(Vector2(map_origin.x, bg_top_left.y), Vector2(map_origin.x, bg_bottom_right.y), red_color, grid_halfwidth * 1.5)
-	draw_line(Vector2(bg_top_left.x, map_origin.y), Vector2(bg_bottom_right.x, map_origin.y), red_color, grid_halfwidth * 1.5)
+	draw_line(Vector2(map_origin.x, bg_top_left.y), Vector2(map_origin.x, bg_bottom_right.y), red_color, major_grid_linewidth)
+	draw_line(Vector2(bg_top_left.x, map_origin.y), Vector2(bg_bottom_right.x, map_origin.y), red_color, major_grid_linewidth)
 
 
 func _input(event: InputEvent) -> void:
@@ -91,17 +95,36 @@ func _input(event: InputEvent) -> void:
 
 func fade_out_grid() -> void:
 	await get_tree().process_frame
-	while grid_color_major.a > 0.01:
-		grid_color_major.a *= 0.96
-		grid_color_minor.a *= 0.96
+	while major_grid_colour.a > 0.01:
+		major_grid_colour.a *= 0.96
+		minor_grid_colour.a *= 0.96
 		queue_redraw()
 		await get_tree().process_frame
 
 
 func fade_in_grid() -> void:
 	await get_tree().process_frame
-	while grid_color_major.a < 0.49:
-		grid_color_major.a *= 1.04
-		grid_color_minor.a *= 1.04
+	while major_grid_colour.a < 0.49:
+		major_grid_colour.a *= 1.04
+		major_grid_colour.a *= 1.04
 		queue_redraw()
 		await get_tree().process_frame
+
+
+func _on_zoom_changed(zoom_factor: float) -> void:
+	
+	#threshold for when we thicken grid lines and change square grouping
+	if zoom_factor < 0.3:
+		zoom_scale = 2.0
+		major_line_every = 20
+		minor_line_every = 2
+
+	else:
+		zoom_scale = 1.0
+		major_line_every = 10
+		minor_line_every = 1
+
+	
+	major_grid_linewidth = minor_grid_linewidth * 1.5 * zoom_scale
+
+	queue_redraw()

@@ -72,7 +72,6 @@ func _process(delta: float) -> void:
 func _set_zoom(next: Vector2) -> void:
 	var z := clampf(next.x, MIN_ZOOM, MAX_ZOOM)
 	target_zoom = Vector2(z, z)
-	print(target_zoom)
 	signals.emit_logged("zoom_changed", target_zoom.x/START_ZOOM.x)
 
 

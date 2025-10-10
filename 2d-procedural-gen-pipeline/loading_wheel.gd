@@ -43,7 +43,7 @@ func _draw():
 	for i in range(trail.size()):
 		var alpha = 1.0 - float(i) / MAX_TRAIL_LENGTH
 		var c = trail[i]["color"]
-		draw_circle(trail[i]["pos"], 15*scale_factor/2, Color(c.r, c.g, c.b, alpha))
+		draw_circle(trail[i]["pos"], 10*scale_factor/2, Color(c.r, c.g, c.b, alpha))
 
 
 func start():
