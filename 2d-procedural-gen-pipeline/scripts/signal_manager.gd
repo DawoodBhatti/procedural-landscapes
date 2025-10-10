@@ -5,9 +5,14 @@ extends Node
 
 var signal_detail : int = 0
 
+## UI panel signals
 signal gen_phase_selected(new_phase: String)     
 signal dist_type_selected(new_phase: String)     
+signal dist_area_selected(new_phase: String)     
 signal rand_dist_requested(num_points: int, seed_num: int)
+
+## UI camera signals
+signal zoom_changed(new_zoom: float)
 
 # ----------------------------
 # 📣 Emit wrapper with optional debug logging

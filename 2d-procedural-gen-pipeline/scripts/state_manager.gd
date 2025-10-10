@@ -17,6 +17,7 @@ var active_sub_phase: String = ""
 const GEN_PHASES = ["Seeding", "Connecting", "Other"]
 const SUB_PHASES = ["Random", "Fibonacci", "Poisson Disk", "Halton Sequence", "Circular"]
 
+
 func _ready() -> void:
 	signals.gen_phase_selected.connect(_on_gen_phase_selected)
 	signals.dist_type_selected.connect(_on_dist_type_selected)

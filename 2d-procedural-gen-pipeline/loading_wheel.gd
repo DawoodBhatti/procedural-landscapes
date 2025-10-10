@@ -6,10 +6,11 @@ var speed := 3.0  # degrees per frame
 var spinning := false
 var trail := []
 var stagger : int = 100
+var scale_factor = 1.0
 
 var hue := 0.0
-const MAX_TRAIL_LENGTH := 10
-const HUE_SPEED := 0.0001  # slow fade
+const MAX_TRAIL_LENGTH := 105
+const HUE_SPEED := 0.001  # slow fade
 
 #set load icon to middle of viewport
 func _ready():
@@ -28,7 +29,7 @@ func _process(delta):
 			hue -= 1.0
 
 		var rad = deg_to_rad(angle)
-		var pos = Vector2(cos(rad), sin(rad)) * radius
+		var pos = Vector2(cos(rad), sin(rad)) * radius * scale_factor/2
 		var color = Color.from_hsv(hue, 1.0, 1.0)
 
 		trail.insert(0, { "pos": pos, "color": color })
@@ -42,7 +43,7 @@ func _draw():
 	for i in range(trail.size()):
 		var alpha = 1.0 - float(i) / MAX_TRAIL_LENGTH
 		var c = trail[i]["color"]
-		draw_circle(trail[i]["pos"], 10, Color(c.r, c.g, c.b, alpha))
+		draw_circle(trail[i]["pos"], 15*scale_factor/2, Color(c.r, c.g, c.b, alpha))
 
 
 func start():

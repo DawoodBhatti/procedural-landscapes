@@ -16,6 +16,11 @@ const TILE_SIZE : float = 10.0
 # Major line frequency (every N tiles draw a stronger line)
 const MAJOR_LINE_EVERY : int = 10
 
+
+#TODO: we want to draw the major axis differently depending on the zoom level
+#TODO: muck around with this....
+
+
 #we draw the grid in 4 quadrants from the origin to avoid offset issues
 func _draw() -> void:
 	if grid_color_major.a <= 0.01:

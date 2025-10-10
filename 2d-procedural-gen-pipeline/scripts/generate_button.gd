@@ -12,6 +12,9 @@ func _ready() -> void:
 
 func _apply_go_button_style() -> void:
 	theme = null
+	
+	#disables grey outline that shows when clicked
+	focus_mode = Control.FOCUS_NONE
 
 	var green_bg := Color("#008500")       # Semi-transparent dark green background  
 	var green_text := Color("#008500")     # Semi-transparent bright green text  

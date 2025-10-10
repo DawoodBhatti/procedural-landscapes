@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://ddt3y2gcsslnd"]
+[gd_scene load_steps=10 format=3 uid="uid://ddt3y2gcsslnd"]
 
 [ext_resource type="Script" uid="uid://bghuptbgk8wbb" path="res://scripts/dist_options.gd" id="1_3nhhm"]
 [ext_resource type="Script" uid="uid://ckgw2v8xenr0c" path="res://scripts/generation_options.gd" id="1_5hor1"]
 [ext_resource type="Script" uid="uid://br5ituxfuefnp" path="res://scripts/position_manager.gd" id="1_83eeh"]
 [ext_resource type="Script" uid="uid://26dphkgxkor" path="res://scripts/state_manager.gd" id="3_mpv8h"]
+[ext_resource type="Script" uid="uid://drcam5og3o7gv" path="res://scenes/dist_areas.gd" id="4_83eeh"]
 [ext_resource type="Script" uid="uid://rejciowe8h0t" path="res://scripts/generate_button.gd" id="4_q4a4c"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fgmrb"]
@@ -77,6 +78,51 @@ script = ExtResource("1_5hor1")
 [node name="SeedingSegment" type="CanvasLayer" parent="GenerationPanel"]
 unique_name_in_owner = true
 
+[node name="DistributionArea" type="Panel" parent="GenerationPanel/SeedingSegment"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 864.0
+offset_top = -452.0
+offset_right = 1376.0
+offset_bottom = -299.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5hor1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GenerationPanel/SeedingSegment/DistributionArea"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 16.0
+offset_right = 464.0
+offset_bottom = 136.0
+mouse_filter = 2
+
+[node name="DistributionArea" type="Label" parent="GenerationPanel/SeedingSegment/DistributionArea/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+mouse_filter = 0
+theme_override_font_sizes/font_size = 40
+text = "Distribution Area:"
+
+[node name="DistAreas" type="OptionButton" parent="GenerationPanel/SeedingSegment/DistributionArea/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+selected = 0
+item_count = 3
+popup/item_0/text = "Small"
+popup/item_0/id = 0
+popup/item_1/text = "Medium"
+popup/item_1/id = 1
+popup/item_2/text = "Large"
+popup/item_2/id = 2
+script = ExtResource("4_83eeh")
+
 [node name="DistributionType" type="Panel" parent="GenerationPanel/SeedingSegment"]
 anchors_preset = 8
 anchor_left = 0.5
@@ -136,9 +182,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 864.0
-offset_top = -452.0
+offset_top = -300.0
 offset_right = 1376.0
-offset_bottom = -292.0
+offset_bottom = -140.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -197,9 +243,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 904.0
-offset_top = -276.0
+offset_top = -124.0
 offset_right = 1328.0
-offset_bottom = -180.0
+offset_bottom = -28.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 40
@@ -207,6 +253,7 @@ text = "Generate!"
 script = ExtResource("4_q4a4c")
 
 [connection signal="item_selected" from="GenerationPanel/GenerationPhase/VBoxContainer/GenOptions" to="GenerationPanel/GenerationPhase/VBoxContainer/GenOptions" method="_on_item_selected"]
+[connection signal="item_selected" from="GenerationPanel/SeedingSegment/DistributionArea/VBoxContainer/DistAreas" to="GenerationPanel/SeedingSegment/DistributionArea/VBoxContainer/DistAreas" method="_on_item_selected"]
 [connection signal="item_selected" from="GenerationPanel/SeedingSegment/DistributionType/VBoxContainer/DistTypes" to="GenerationPanel/SeedingSegment/DistributionType/VBoxContainer/DistTypes" method="_on_item_selected"]
 [connection signal="text_changed" from="GenerationPanel/SeedingSegment/RandomDist/Parameters/Values/NumPoints" to="." method="_on_seed_value_changed"]
 [connection signal="text_changed" from="GenerationPanel/SeedingSegment/RandomDist/Parameters/Values/SeedNum" to="." method="_on_seed_value_changed"]
